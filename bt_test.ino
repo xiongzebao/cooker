@@ -1,10 +1,12 @@
-#define LED 13
 
+#include <ArduinoJson.h>
+#define LED 13
 char json[] = "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
+String inputString = "";         // a String to hold incoming data
+bool stringComplete = false;  // whether the string is complete
+
 
 DynamicJsonDocument doc(1024);
-deserializeJson(doc, json);
-
 const char* sensor = doc["sensor"];
 long time          = doc["time"];
 double latitude    = doc["data"][0];
@@ -13,6 +15,9 @@ double longitude   = doc["data"][1];
 
 
 void setup() {
+  
+
+deserializeJson(doc, json);
   // put your setup code here, to run once:
   Serial.begin(115200);
 }
